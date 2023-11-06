@@ -29,10 +29,7 @@ class Dalle2():
 
     def generate_and_download(self, prompt, image_dir=os.getcwd()):
         generations = self.generate(prompt)
-        if not generations:
-            return None
-
-        return self.download(generations, image_dir)
+        return None if not generations else self.download(generations, image_dir)
 
     def generate_amount(self, prompt, amount):
         if amount < self.batch_size:
@@ -59,7 +56,7 @@ class Dalle2():
     def get_task_response(self, body):
         url = "https://labs.openai.com/api/labs/tasks"
         headers = {
-            'Authorization': "Bearer " + self.bearer,
+            'Authorization': f"Bearer {self.bearer}",
             'Content-Type': "application/json",
         }
 
